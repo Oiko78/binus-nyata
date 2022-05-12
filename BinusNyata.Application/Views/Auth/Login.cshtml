@@ -1,0 +1,46 @@
+﻿@model LoginRequest
+
+@{
+  ViewData["title"] = "Login";
+}
+
+<main class="fade">
+  @using (Html.BeginForm("Login", "Auth", FormMethod.Post))
+  {
+    <header></header>
+    <section class="space-y-3">
+      <div class="field-wrapper">
+        <div class="field">
+          @Html.TextBoxFor(m => m.Email, new { @placeholder = "Email / Username", @type = "email" })
+          <div class="icon ph-envelope-simple">
+            <div class="tooltip">
+              @Html.ValidationMessageFor(m => m.Email)
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="field-wrapper">
+        <div class="field">
+          @Html.PasswordFor(m => m.Password, new { @placeholder = "Password"})
+          <div class="icon ph-lock">
+            <div class="tooltip">
+              @Html.ValidationMessageFor(m => m.Password)
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer>
+      <button type="submit" class="button">Login</button>
+      <p>Don't have an account yet? @Html.ActionLink("Register", "Register", "Auth")</p>
+    </footer>
+  }
+</main>
+
+@section Styles {
+<link rel="stylesheet" href="~/css/authentication.css" />
+}
+
+@section Scripts {
+<script src="~/js/authentication.js" type="module"></script>
+}

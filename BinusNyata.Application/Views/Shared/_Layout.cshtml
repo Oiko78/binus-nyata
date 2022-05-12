@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BinusNyata | @ViewData["Title"]</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/phosphor-icons"></script>
+
+  <link rel="stylesheet" href="~/css/site.css" />
+  @await RenderSectionAsync("Styles", required: false)
+</head>
+
+<body class="background">
+  <div class="blur"></div>
+  <div class="overlay">
+    <div class="prompt"></div>
+  </div>
+  @RenderBody()
+
+  <script src="~/lib/jquery/dist/jquery.min.js"></script>
+  <script src="~/js/site.js" asp-append-version="true"></script>
+  @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>
