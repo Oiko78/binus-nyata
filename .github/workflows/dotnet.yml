@@ -26,9 +26,9 @@ jobs:
     - name: Publish
       run: dotnet publish BinusNyata.Application/BinusNyata.Application.csproj -c Release -o website
     - name: Upload a Build Artifact
-      uses: actions/upload-artifact@v2.2.3
+      uses: actions/upload-artifact@v3.0.0
       with:
         name: website
-        path: BinusNyata.Application/website/**
+        path: BinusNyata.Application/bin/**
         if-no-files-found: warn
         retention-days: 0
