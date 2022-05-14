@@ -1,5 +1,7 @@
+using System;
 using System.Linq;
 using System.Reflection;
+using BinusNyata.Domain.Interfaces;
 using BinusNyata.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -34,14 +36,22 @@ namespace BinusNyata.Application.Extensions
 
     public static IServiceCollection AddRepositories(this IServiceCollection services)
     {
-      Assembly
-        .GetExecutingAssembly()
+      AppDomain.CurrentDomain
+        .GetAssemblies()
+        .Where(x => x.FullName.Contains("BinusNyata.Infrastructure"))
+        .First()
         .GetTypes()
         .Where(type => type.IsClass && !type.IsAbstract && type.FullName.EndsWith("Repository"))
         .ToList()
         .ForEach(type => services.AddScoped(type));
 
       return services;
+    }
+
+    public static IServiceCollection AddUnitOfWork(this IServiceCollection services)
+    {
+      return services
+      .AddScoped<IUnitOfWork, UnitOfWork>();
     }
   }
 }

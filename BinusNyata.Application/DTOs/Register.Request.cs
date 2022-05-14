@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace BinusNyata.Application.DTOs
@@ -9,7 +10,7 @@ namespace BinusNyata.Application.DTOs
     public string Email { get; set; }
 
     [Required]
-    [StringLength(8)]
+    [MinLength(8)]
     [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$")]
     public string Password { get; set; }
 
@@ -18,5 +19,8 @@ namespace BinusNyata.Application.DTOs
 
     [Required]
     public string LastName { get; set; }
+
+    [Timestamp]
+    public DateTime? Birthday { get; set; }
   }
 }

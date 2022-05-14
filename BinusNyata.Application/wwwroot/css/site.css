@@ -58,6 +58,8 @@ button.button:disabled:hover {
 }
 
 .field-wrapper {
+  display: flex;
+  flex-direction: row;
   position: relative;
 }
 
@@ -65,6 +67,7 @@ button.button:disabled:hover {
   display: flex;
   align-items: center;
   overflow: hidden;
+  flex: 1;
   border-radius: 5px;
 }
 
@@ -156,7 +159,8 @@ input.error ~ .icon {
   background-color: rgba(227, 35, 35, 0.8);
 }
 
-input.error ~ .icon:hover .tooltip {
+input.error ~ .icon:hover .tooltip,
+input.error.active ~ .icon .tooltip {
   opacity: 1;
   visibility: visible;
 }

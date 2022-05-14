@@ -39,9 +39,11 @@ namespace BinusNyata.Application
       // });
       // services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
       services.AddControllersWithViews().AddRazorRuntimeCompilation();
-      services.AddDatabase(_configuration);
-      services.AddRepositories();
-      services.AddBusinessServices();
+      services
+        .AddDatabase(_configuration)
+        .AddUnitOfWork()
+        .AddRepositories()
+        .AddBusinessServices();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

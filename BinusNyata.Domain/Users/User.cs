@@ -12,13 +12,15 @@ namespace BinusNyata.Domain.Users
   [Table("User")]
   public partial class User : BaseEntity<int>
   {
-    [Column("Name")]
-    public String Name { get; set; }
+    [Column("FirstName")]
+    public String FirstName { get; set; }
 
-    [Column("Birth")]
-    public DateTime Birth { get; set; }
+    [Column("LastName")]
+    public String LastName { get; set; }
 
-    public virtual ICollection<Account> Accounts { get; set; }
+    public virtual Account Account { get; set; }
+    public virtual ICollection<Role> Roles { get; set; }
+    public virtual Profile Profile { get; set; }
   }
   public class UserModelBuilder : IEntityTypeConfiguration<User>
   {

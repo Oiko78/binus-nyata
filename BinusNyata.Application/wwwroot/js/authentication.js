@@ -6,8 +6,15 @@ $(".tooltip span")
   })
   .parent(".tooltip")
   .parent(".icon")
-  .siblings("input")
-  .addClass("error");
+  .prev()
+  .addClass("error")
+  .first()
+  .addClass("active");
+
+$(document).on("click", function (e) {
+  if (!$(e.target).closest(".tooltip").not(this).length)
+    $(".active").removeClass("active");
+});
 
 $("main .button").on("click", function (ev) {
   const el = $(this);
@@ -36,3 +43,33 @@ $("main form").on("submit", function (ev) {
     document.querySelector("main form").submit();
   }, 500);
 });
+
+// $("main form input[type='text']").on("focus", function () {
+//   const el = $(this);
+//   const date = new Date(el.val());
+//   el.attr("type", "date");
+//   el.val(clearFormat(date));
+//   console.log(clearFormat(date));
+// });
+
+// $("main form input[type='text']").on("blur", function () {
+//   const el = $(this);
+//   el.attr("type", "text");
+
+//   const date = new Date(el.val());
+//   el.val(
+//     date.toLocaleDateString("id-ID", {
+//       day: "2-digit",
+//       month: "long",
+//       year: "numeric",
+//     })
+//   );
+//   console.log(el.val());
+// });
+
+function clearFormat(date) {
+  const day = date.getDay().toString().padStart(2, 0);
+  const month = date.getMonth().toString().padStart(2, 0);
+  const year = date.getFullYear().toString().padStart(4, 0);
+  return `${year}-${month}-${day}`;
+}

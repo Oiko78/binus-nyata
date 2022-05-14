@@ -11,7 +11,6 @@ namespace BinusNyata.Infrastructure.Data
 {
   public class DBContext : DbContext
   {
-    public virtual DbSet<Account> Accounts { get; set; }
     public virtual DbSet<User> Users { get; set; }
     public DBContext(DbContextOptions<DBContext> options) : base(options)
     { }

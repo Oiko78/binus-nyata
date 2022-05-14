@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using BinusNyata.Domain.Base;
 using Microsoft.EntityFrameworkCore;
@@ -15,7 +16,6 @@ namespace BinusNyata.Domain.Accounts
     [Column("Password")]
     public String Password { get; set; }
 
-    public virtual AccountType Type { get; set; }
   }
   public class AccountModelBuilder : IEntityTypeConfiguration<Account>
   {

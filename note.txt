@@ -1,0 +1,3 @@
+cd BinusNyata.Application
+dotnet ef migrations add <migration_comment> -p ..\BinusNyata.Infrastructure\
+dotnet ef database update
