@@ -1,8 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-#nullable disable
-
 namespace BinusNyata.Infrastructure.Migrations
 {
     public partial class Initial : Migration
@@ -38,19 +36,6 @@ namespace BinusNyata.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Role",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Role", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "User",
                 columns: table => new
                 {
@@ -68,57 +53,55 @@ namespace BinusNyata.Infrastructure.Migrations
                         name: "FK_User_Account_AccountId",
                         column: x => x.AccountId,
                         principalTable: "Account",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_User_Profile_ProfileId",
                         column: x => x.ProfileId,
                         principalTable: "Profile",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "RoleUser",
+                name: "Role",
                 columns: table => new
                 {
-                    RolesId = table.Column<int>(type: "int", nullable: false),
-                    UsersId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RoleUser", x => new { x.RolesId, x.UsersId });
+                    table.PrimaryKey("PK_Role", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_RoleUser_Role_RolesId",
-                        column: x => x.RolesId,
-                        principalTable: "Role",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_RoleUser_User_UsersId",
-                        column: x => x.UsersId,
+                        name: "FK_Role_User_UserId",
+                        column: x => x.UserId,
                         principalTable: "User",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
                 table: "Role",
-                columns: new[] { "Id", "Name" },
-                values: new object[] { 1, "Student" });
+                columns: new[] { "Id", "Name", "UserId" },
+                values: new object[] { 1, "Student", null });
 
             migrationBuilder.InsertData(
                 table: "Role",
-                columns: new[] { "Id", "Name" },
-                values: new object[] { 2, "Lecturer" });
+                columns: new[] { "Id", "Name", "UserId" },
+                values: new object[] { 2, "Lecturer", null });
 
             migrationBuilder.InsertData(
                 table: "Role",
-                columns: new[] { "Id", "Name" },
-                values: new object[] { 3, "Staff" });
+                columns: new[] { "Id", "Name", "UserId" },
+                values: new object[] { 3, "Staff", null });
 
             migrationBuilder.CreateIndex(
-                name: "IX_RoleUser_UsersId",
-                table: "RoleUser",
-                column: "UsersId");
+                name: "IX_Role_UserId",
+                table: "Role",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_User_AccountId",
@@ -133,9 +116,6 @@ namespace BinusNyata.Infrastructure.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "RoleUser");
-
             migrationBuilder.DropTable(
                 name: "Role");
 
